@@ -1,4 +1,5 @@
 @Library('jenkins-shared-library@main') _
+
 pipeline {
     agent {
         docker {
@@ -13,6 +14,16 @@ pipeline {
     }
 
     stages {
+        stage('Git Checkout') {
+            steps {
+                // Используем общий шаг из библиотеки
+                gitCheckout(
+                    branch: 'master',
+                    url: 'https://github.com/bahich972-star/project_template'
+                )
+            }
+        }
+
         stage('Check Environment') {
             steps {
                 echo '=== Проверка окружения ==='
